@@ -17,19 +17,19 @@ Item::Item(int price)
   this->name = NO_NAME;
 }
 
-std::string Item::getName()
+std::string Item::getName() const
 {
   return this->name;
 }
 
-int Item::getPrice()
+int Item::getPrice() const
 {
   return this->price;
 }
 
-void Item::setPrice(int price)
+void Item::setPrice(int itemPrice)
 {
-  this->price = price;
+  this->price = itemPrice;
 }
 
 

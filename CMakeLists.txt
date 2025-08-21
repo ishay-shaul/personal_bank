@@ -5,4 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(untitled1 main.cpp
         Item.h
-        Item.cpp)
+        Item.cpp
+        Time.h
+        Month.h
+        Month.cpp)

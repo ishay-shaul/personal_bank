@@ -15,8 +15,8 @@ class Item
   public:
     Item(const std::string& name, int price);
     Item(int price);
-    std::string getName();
-    int getPrice();
+    std::string getName() const;
+    int getPrice() const ;
     void setPrice(int price);
 };
 
