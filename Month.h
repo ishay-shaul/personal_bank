@@ -18,7 +18,7 @@ class Month
     void addItem(Item* item);
     void display();
     Item* getItem(std::string name);
-
+    int getMonth();
 };
 
 #endif //UNTITLED1_MONTH_H

@@ -31,5 +31,11 @@ Item* Month::getItem(std::string name)
   }
 }
 
+int Month::getMonth()
+{
+  return month;
+}
+
+
 
 
