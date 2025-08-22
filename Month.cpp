@@ -12,6 +12,7 @@ Month::Month(int num)
 void Month::addItem(Item* item)
 {
   this->monthlyPurchases[item->getName()] = item;
+  this->purchasesOrdered.push_back (item);
 }
 
 void Month::display()
@@ -31,9 +32,29 @@ Item* Month::getItem(std::string name)
   }
 }
 
-int Month::getMonth()
+int Month::getMonthNumber()
 {
   return month;
+}
+
+Month* Month::getMonth(){
+  return this;
+}
+
+Item *Month::getLastItem ()
+{
+  return this->purchasesOrdered.front();
+}
+
+size_t Month::getTotal ()
+{
+  size_t total = 0;
+  for(auto it = this->purchasesOrdered.begin(); it != this->purchasesOrdered
+  .end(); it++){
+    Item* curItem = *it;
+    total += curItem->getPrice();
+  }
+  return total;
 }
 
 

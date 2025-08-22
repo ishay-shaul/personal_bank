@@ -47,4 +47,23 @@ Month *Year::getMonth (int num)
   }
 }
 
+size_t Year::getTotal ()
+{
+  size_t total = 0;
+  for(auto it = this->allMonths.begin(); it != this->allMonths
+  .end(); it++){
+      Month* curMonth = *it;
+      total += curMonth->getTotal();
+  }
+  return total;
+}
+
+Month *Year::findMonth (int num)
+{
+  if(num < 0 || num > allMonths.size()){
+    return nullptr;
+  }
+  return allMonths[allMonths.size() - num];
+}
+
 

@@ -5,12 +5,14 @@
 #ifndef UNTITLED1_MONTH_H
 #define UNTITLED1_MONTH_H
 #include <unordered_map>
+#include <vector>
 #include "Item.h"
 
 class Month
 {
   private:
     std::unordered_map< std::string, Item*> monthlyPurchases;
+    std::vector<Item*> purchasesOrdered;
     int month;
 
   public:
@@ -18,7 +20,10 @@ class Month
     void addItem(Item* item);
     void display();
     Item* getItem(std::string name);
-    int getMonth();
+    Item* getLastItem();
+    int getMonthNumber();
+    Month* getMonth();
+    size_t getTotal();
 };
 
 #endif //UNTITLED1_MONTH_H

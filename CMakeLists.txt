@@ -10,4 +10,6 @@ add_executable(untitled1 main.cpp
         Month.h
         Month.cpp
         Year.h
-        Year.cpp)
+        Year.cpp
+        User.h
+        User.cpp)

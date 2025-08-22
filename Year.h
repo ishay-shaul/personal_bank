@@ -19,9 +19,11 @@ class Year
 //    ~Year();
     int getYear();
     void addMonth(Month* month);
+    Month* findMonth(int num);
     void addItem(Item* item);
     void display();
     Month* getMonth(int num);
+    size_t getTotal();
 };
 
 #endif //UNTITLED1_YEAR_H
