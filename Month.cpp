@@ -3,6 +3,7 @@
 //
 
 #include "Month.h"
+#include <iostream>
 
 Month::Month(int num)
 {
@@ -17,7 +18,9 @@ void Month::addItem(Item* item)
 
 void Month::display()
 {
-  //pass
+  for(auto purchase: purchasesOrdered){
+    std::cout << purchase->getName() << " " << purchase->getPrice();
+  }
 }
 
 Item* Month::getItem(std::string name)

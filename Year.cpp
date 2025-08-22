@@ -15,13 +15,15 @@ Year::Year(int num)
 
 void Year::display()
 {
-  //pass
+  for(auto month: allMonths){
+    month->display();
+  }
 }
 
 void Year::addMonth(Month *month)
 {
 //  this->yearlyPurchases[month->getMonth()] = month;
-  this->allMonths.push_back(month);
+  allMonths.push_back(month);
 }
 
 void Year::addItem(Item *item) // do i assume that the last item is always of the last month?

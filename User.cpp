@@ -4,6 +4,7 @@
 
 #include "User.h"
 #include <ctime>
+#include <iostream>
 
 User::User (size_t userBudget)
 {
@@ -14,9 +15,14 @@ bool User::addItem (Item *item, int year, int month)
 {
   Year* userYear = findYear (year);
   if(userYear == nullptr){
-    return false;
+    std::cout << "got here" << std::endl;
+    userYear = new Year(year);
+    allYears[year] = userYear;
   }
   userYear->findMonth (month)->addItem (item);
+  if(!userYear->findMonth (month)){
+    userYear->
+  }
   return true;
 }
 
@@ -54,5 +60,12 @@ size_t User::getMonthlyTotal (int monthNum, int year)
   }
   else{
     return requestedMonth->getTotal();
+  }
+}
+
+void User::display ()
+{
+  for(auto year: allYears){
+    year.second->display();
   }
 }
