@@ -8,10 +8,10 @@ Year::Year(int num)
   this->year = num;
 }
 
-Year::~Year()
-{
-  free(this->yearlyPurchases);
-}
+//Year::~Year()
+//{
+//  free(this->yearlyPurchases);
+//}
 
 void Year::display()
 {
@@ -20,14 +20,31 @@ void Year::display()
 
 void Year::addMonth(Month *month)
 {
-  this->yearlyPurchases[month->getMonth()] = month;
+//  this->yearlyPurchases[month->getMonth()] = month;
+  this->allMonths.push_back(month);
 }
 
 void Year::addItem(Item *item) // do i assume that the last item is always of the last month?
 {
-
+  this->allMonths.front()->addItem (item);
 }
 
+int Year::getYear()
+{
+  return this->year;
+}
 
+Month *Year::getMonth (int num)
+{
+  if(num > 12 or num < 1){
+    return nullptr;
+  }
+  else if(this->allMonths.size() < num){
+    return nullptr;
+  }
+  else{
+    return this->allMonths[this->allMonths.size() - num];
+  }
+}
 
 
