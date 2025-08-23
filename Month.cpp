@@ -1,6 +1,3 @@
-//
-// Created by ishay on 21/08/2025.
-//
 
 #include "Month.h"
 #include <iostream>
@@ -10,24 +7,25 @@ Month::Month(int num)
   this->month = num;
 }
 
-void Month::addItem(Item* item)
+void Month::addItem(std::unique_ptr<Item> item)
 {
-  this->monthlyPurchases[item->getName()] = item;
-  this->purchasesOrdered.push_back (item);
+  monthlyPurchases[item->getName()] = std::move(item);
+  purchasesOrdered.push_back (std::move(item));
 }
 
 void Month::display()
 {
-  for(auto purchase: purchasesOrdered){
+  for(const auto& purchase: purchasesOrdered){
     std::cout << purchase->getName() << " " << purchase->getPrice();
   }
 }
 
 Item* Month::getItem(std::string name)
 {
-  if (monthlyPurchases.find(name) != monthlyPurchases.end())
+  auto it = monthlyPurchases.find(name);
+  if (it != monthlyPurchases.end())
   {
-    return monthlyPurchases[name];
+    return it->second.get();
   }
   else
   {
@@ -46,20 +44,15 @@ Month* Month::getMonth(){
 
 Item *Month::getLastItem ()
 {
-  return this->purchasesOrdered.front();
+  return purchasesOrdered.front().get();
 }
 
 size_t Month::getTotal ()
 {
   size_t total = 0;
-  for(auto it = this->purchasesOrdered.begin(); it != this->purchasesOrdered
+  for(auto it = purchasesOrdered.begin(); it != purchasesOrdered
   .end(); it++){
-    Item* curItem = *it;
-    total += curItem->getPrice();
+    total += (*it)->getPrice();
   }
   return total;
 }
-
-
-
-

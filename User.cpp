@@ -1,6 +1,3 @@
-//
-// Created by ishay on 22/08/2025.
-//
 
 #include "User.h"
 #include <ctime>
@@ -9,6 +6,50 @@
 User::User (size_t userBudget)
 {
   this->budget = userBudget;
+}
+
+User::~User ()
+{
+  for(const auto& pair: allYears){
+    delete pair.second;
+  }
+//  for(const auto& single: years){
+//    delete single;
+//  }
+  allYears.clear();
+//  years.clear();
+}
+
+User::User (const User &other)
+{
+  for(const auto& pair: other.allYears){
+    allYears[pair.first] = new Year(*pair.second);
+  }
+//  for(const auto& single: other.years){
+//    years.push_back (new Year(*single));
+//  }
+}
+
+User &User::operator= (const User &other)
+{
+  if(this != &other){
+    for(const auto& pair: allYears){
+      delete pair.second;
+    }
+//    for(const auto& single: years){
+//      delete single;
+//    }
+    allYears.clear();
+//    years.clear();
+
+    for(const auto& pair: other.allYears){
+      allYears[pair.first] = new Year(*pair.second);
+    }
+//    for(const auto& single: other.years){
+//      years.push_back (new Year(*single));
+//    }
+  }
+  return *this;
 }
 
 bool User::addItem (Item *item, int year, int month)
@@ -21,7 +62,8 @@ bool User::addItem (Item *item, int year, int month)
   }
   userYear->findMonth (month)->addItem (item);
   if(!userYear->findMonth (month)){
-    userYear->
+    userYear->addMonth (new Month(month));
+    userYear->addItem (item, month);
   }
   return true;
 }

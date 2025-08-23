@@ -11,16 +11,18 @@
 class Year
 {
   private:
-//    std::unordered_map<int, Month*> yearlyPurchases; // maybe should be linked list
-    std::vector<Month*> allMonths;
-    int year;
+    std::unordered_map<int, Month*> allMonths; // maybe should be linked list
+//    std::vector<Month*> allMonths;
+    int year{};
     public:
     Year(int num);
-//    ~Year();
+    ~Year();
+    Year(const Year& other);
+    Year& operator= (const Year& other);
     int getYear();
     void addMonth(Month* month);
     Month* findMonth(int num);
-    void addItem(Item* item);
+    void addItem(Item* item, int month);
     void display();
     Month* getMonth(int num);
     size_t getTotal();

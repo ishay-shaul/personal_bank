@@ -6,21 +6,26 @@
 #define UNTITLED1_MONTH_H
 #include <unordered_map>
 #include <vector>
+#include <memory>
 #include "Item.h"
 
 class Month
 {
   private:
-    std::unordered_map< std::string, Item*> monthlyPurchases;
-    std::vector<Item*> purchasesOrdered;
+//    std::unordered_map< std::string, Item*> monthlyPurchases;
+  std::unordered_map< std::string, std::unique_ptr<Item>> monthlyPurchases;
+    std::vector<std::unique_ptr<Item>> purchasesOrdered;
     int month;
 
   public:
     Month(int num);
-    void addItem(Item* item);
+    void addItem(std::unique_ptr<Item> item);
     void display();
-    Item* getItem(std::string name);
-    Item* getLastItem();
+//    ~Month();
+//    Month(const Month& other);
+//    Month& operator= (const Month& other);
+  Item* getItem(std::string name);
+  Item* getLastItem();
     int getMonthNumber();
     Month* getMonth();
     size_t getTotal();
