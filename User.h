@@ -3,16 +3,17 @@
 #define _USER_H_
 #include "Year.h"
 
-class User{
- private:
-    std::unordered_map<int, Year*> allYears;
-//    std::vector<Year*> years;
+class User
+{
+  private:
+    std::unordered_map<int, std::unique_ptr<Year> > allYears;
+    //    std::vector<Year*> years;
     size_t budget;
     Year* findYear(int num);
 
  public:
     User(size_t userBudget);
-    bool addItem(Item* item, int year, int month);
+    void addItem(std::unique_ptr<Item> item, int year, int month);
     void display();
     ~User();
     User(const User& other);

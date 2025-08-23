@@ -8,75 +8,74 @@ User::User (size_t userBudget)
   this->budget = userBudget;
 }
 
-User::~User ()
+// User::~User ()
+// {
+//   for(const auto& pair: allYears){
+//     delete pair.second;
+//   }
+// //  for(const auto& single: years){
+// //    delete single;
+// //  }
+//   allYears.clear();
+// //  years.clear();
+// }
+//
+// User::User (const User &other)
+// {
+//   for(const auto& pair: other.allYears){
+//     allYears[pair.first] = new Year(*pair.second);
+//   }
+// //  for(const auto& single: other.years){
+// //    years.push_back (new Year(*single));
+// //  }
+// }
+//
+// User &User::operator= (const User &other)
+// {
+//   if(this != &other){
+//     for(const auto& pair: allYears){
+//       delete pair.second;
+//     }
+// //    for(const auto& single: years){
+// //      delete single;
+// //    }
+//     allYears.clear();
+// //    years.clear();
+//
+//     for(const auto& pair: other.allYears){
+//       allYears[pair.first] = new Year(*pair.second);
+//     }
+// //    for(const auto& single: other.years){
+// //      years.push_back (new Year(*single));
+// //    }
+//   }
+//   return *this;
+// }
+
+void User::addItem (std::unique_ptr<Item>item, int year, int month)
 {
-  for(const auto& pair: allYears){
-    delete pair.second;
+  if (allYears.find(year) == allYears.end())
+  {
+    allYears[year] = std::make_unique<Year>(year);
   }
-//  for(const auto& single: years){
-//    delete single;
-//  }
-  allYears.clear();
-//  years.clear();
+
+  Year* yearPtr = allYears[year].get();
+
+  if (!yearPtr->findMonth(month))
+  {
+    yearPtr->addMonth(std::make_unique<Month>(month));
+  }
+
+  yearPtr->addItem(std::move(item), month);
 }
 
-User::User (const User &other)
-{
-  for(const auto& pair: other.allYears){
-    allYears[pair.first] = new Year(*pair.second);
-  }
-//  for(const auto& single: other.years){
-//    years.push_back (new Year(*single));
-//  }
-}
-
-User &User::operator= (const User &other)
-{
-  if(this != &other){
-    for(const auto& pair: allYears){
-      delete pair.second;
-    }
-//    for(const auto& single: years){
-//      delete single;
-//    }
-    allYears.clear();
-//    years.clear();
-
-    for(const auto& pair: other.allYears){
-      allYears[pair.first] = new Year(*pair.second);
-    }
-//    for(const auto& single: other.years){
-//      years.push_back (new Year(*single));
-//    }
-  }
-  return *this;
-}
-
-bool User::addItem (Item *item, int year, int month)
-{
-  Year* userYear = findYear (year);
-  if(userYear == nullptr){
-    std::cout << "got here" << std::endl;
-    userYear = new Year(year);
-    allYears[year] = userYear;
-  }
-  userYear->findMonth (month)->addItem (item);
-  if(!userYear->findMonth (month)){
-    userYear->addMonth (new Month(month));
-    userYear->addItem (item, month);
-  }
-  return true;
-}
-
-Year *User::findYear (int num)
+Year* User::findYear (int num)
 {
   auto it = allYears.find (num);
-  if(it == allYears.end()){
-    return nullptr;
+  if(it != allYears.end()){
+    return it->second.get();
   }
-  else{
-    return it->second;
-  }
+  return nullptr;
 }
 
 size_t User::getYearlyTotal (int year)
@@ -107,7 +106,7 @@ size_t User::getMonthlyTotal (int monthNum, int year)
 
 void User::display ()
 {
-  for(auto year: allYears){
+  for(const auto& year: allYears){
     year.second->display();
   }
 }
