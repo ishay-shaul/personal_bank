@@ -8,96 +8,88 @@ Year::Year(int num)
   year = num;
 }
 
-Year::~Year()
-{
-  for(auto& pair: allMonths){
-    delete pair.second;
-  }
-}
-
-Year::Year (const Year &other)
-{
-  for(const auto& pair: other.allMonths){
-    allMonths[pair.first] = new Month(*pair.second);
-  }
-}
-
-Year &Year::operator= (const Year &other)
-{
-  if(this != &other){
-    for(const auto& pair: allMonths){
-      delete pair.second;
-    }
-    allMonths.clear();
-
-    for(const auto& pair: other.allMonths){
-      allMonths[pair.first] = new Month(*pair.second);
-    }
-  }
-  return *this;
-}
+// Year::~Year()
+// {
+//   for(auto& pair: allMonths){
+//     delete pair.second;
+//   }
+// }
+//
+// Year::Year (const Year &other)
+// {
+//   for(const auto& pair: other.allMonths){
+//     allMonths[pair.first] = new Month(*pair.second);
+//   }
+// }
+//
+// Year &Year::operator= (const Year &other)
+// {
+//   if(this != &other){
+//     for(const auto& pair: allMonths){
+//       delete pair.second;
+//     }
+//     allMonths.clear();
+//
+//     for(const auto& pair: other.allMonths){
+//       allMonths[pair.first] = new Month(*pair.second);
+//     }
+//   }
+//   return *this;
+// }
 
 void Year::display()
 {
-  for(auto month: allMonths){
+  for(const auto& month: allMonths){
     month.second->display();
   }
 }
 
-void Year::addMonth(Month *month)
+void Year::addMonth(std::unique_ptr<Month> month)
 {
-  int monthNum = month->getMonthNumber();
+  const int monthNum = month->getMonthNumber();
   if(allMonths.find(monthNum) != allMonths.end()){
     return;
   }
-  allMonths[monthNum] = month;
+  allMonths[monthNum] = std::move(month);
 //  allMonths.push_back(month);
 }
 
-void Year::addItem(Item *item, int month) // do i assume that the last item is
+void Year::addItem(std::unique_ptr<Item>item, int month) // do i assume that the last item is
 // always of the last month?
 {
   if(allMonths.find(month) == allMonths.end()){
-    allMonths[month] = new Month(month);
+    allMonths[month] = std::make_unique<Month>(month);
   }
-  allMonths[month]->addItem (item);
+  allMonths[month]->addItem (std::move(item));
 }
 
-int Year::getYear()
+int Year::getYear() const
 {
-  return this->year;
+  return year;
 }
 
 Month *Year::getMonth (int num)
 {
-  if(num > 12 or num < 1){
-    return nullptr;
+  auto it = allMonths.find(num);
+  if(it != allMonths.end())
+  {
+    return it->second.get();
   }
-  else if(this->allMonths.size() < num){
-    return nullptr;
-  }
-  else{
-    return allMonths[num];
-  }
+  return nullptr;
 }
 
 size_t Year::getTotal ()
 {
   size_t total = 0;
-  for(auto it = this->allMonths.begin(); it != this->allMonths
-  .end(); it++){
-      Month* curMonth = it->second;
-      total += curMonth->getTotal();
+  for(auto& pair: allMonths){
+      total += pair.second->getTotal();
   }
   return total;
 }
 
 Month *Year::findMonth (int num)
 {
-  if(num < 0 || num > allMonths.size()){
-    return nullptr;
-  }
-  return allMonths[num-1];
+  return allMonths.find(num)->second.get();
 }
 
 
