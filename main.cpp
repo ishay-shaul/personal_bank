@@ -13,7 +13,7 @@ int main()
 //  Item* item2 = new Item("car", 1000);
   auto item1 = std::make_unique<Item>("meat", 20);
   auto item2 = std::make_unique<Item>("car", 1000);
-  auto month = new Month(5);
+  auto month = std::make_unique<Month>(5);
   month->addItem(std::move(item1));
   month->addItem(std::move(item2));
   month->display();

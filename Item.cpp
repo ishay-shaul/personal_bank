@@ -31,6 +31,3 @@ void Item::setPrice(int itemPrice)
 {
   this->price = itemPrice;
 }
-
-
-

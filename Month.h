@@ -14,7 +14,7 @@ class Month
   private:
 //    std::unordered_map< std::string, Item*> monthlyPurchases;
   std::unordered_map< std::string, std::unique_ptr<Item>> monthlyPurchases;
-    std::vector<std::unique_ptr<Item>> purchasesOrdered;
+    // std::vector<std::unique_ptr<Item>> purchasesOrdered;
     int month;
 
   public:
@@ -25,7 +25,7 @@ class Month
 //    Month(const Month& other);
 //    Month& operator= (const Month& other);
   Item* getItem(std::string name);
-  Item* getLastItem();
+  // Item* getLastItem();
     int getMonthNumber();
     Month* getMonth();
     size_t getTotal();
