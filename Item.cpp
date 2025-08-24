@@ -14,20 +14,15 @@ Item::Item(const std::string &name, double price)
 Item::Item(double price)
 {
   this->price = price;
-  this->name = NO_NAME;
+  name = NO_NAME;
 }
 
 std::string Item::getName() const
 {
-  return this->name;
+  return name;
 }
 
 double Item::getPrice() const
 {
-  return this->price;
+  return price;
 }
-
-// void Item::setPrice(int itemPrice)
-// {
-//   this->price = itemPrice;
-// }
