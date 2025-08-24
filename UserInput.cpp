@@ -27,6 +27,17 @@ UserInput::UserInput(std::unique_ptr<User> user)
   this->user = std::move(user);
 }
 
+void UserInput::exit()
+{
+  finish = true;
+}
+
+bool UserInput::isFinished() const
+{
+  return finish;
+}
+
+
 
 void UserInput::getFile ()
 {
@@ -39,11 +50,11 @@ std::string UserInput::firstInput ()
 {
   using std::cout;
   std::string option;
-  cout << INTRODUCE;
-  cout << SELECT;
-  cout << GET_SUM;
-  cout << ADD;
-  cout << EXIT;
+  cout << INTRODUCE << std::endl;
+  cout << SELECT << std::endl;
+  cout << GET_SUM << std::endl;
+  cout << ADD << std::endl;
+  cout << EXIT << std::endl;
   std::cin >> option;
   return option;
 }
@@ -51,8 +62,16 @@ std::string UserInput::firstInput ()
 void UserInput::options()
 {
  std::string input = firstInput();
- InitialSelectFactory* factory = new InitialSelectFactory (this);
-  factory->getSelection (input); // uses rest of methods in this class
+ auto factory = new InitialSelectFactory (this);
+  while (true)
+  {
+    if (!factory->getSelection (input))
+    {
+      std::cout << "no such option" << std::endl;
+      continue;
+    }
+    break;
+  }
 }
 
 bool UserInput::checkPriceInput(std::string& str)
@@ -79,7 +98,7 @@ bool UserInput::checkPriceInput(std::string& str)
 
 void UserInput::add()
 {
-  std::string& givenName;
+  std::string givenName;
   std::cout << ITEM_NAME;
   std::cin >> givenName;
   double price = acceptPrice();
@@ -117,14 +136,14 @@ bool UserInput::checkYearInput(std::string &str)
 
 double UserInput::acceptPrice()
 {
-  std::string& givenPrice;
+  std::string givenPrice;
   while (true)
   {
     std::cout << ITEM_PRICE;
     std::cin >> givenPrice;
     if (!checkPriceInput(givenPrice))
     {
-      std::cout << "price entered was not a number";
+      std::cout << "price entered was not a number" << std::endl;
       continue;
     }
     double price = std::stod(givenPrice);
@@ -134,14 +153,14 @@ double UserInput::acceptPrice()
 
 int UserInput::acceptMonth()
 {
-  std::string& givenMonth;
+  std::string givenMonth;
   while (true)
   {
     std::cout << ITEM_MONTH;
     std::cin >> givenMonth;
     if (!checkMonthInput(givenMonth))
     {
-      std::cout << "month entered was not a number";
+      std::cout << "month entered was not a number" << std::endl;
       continue;
     }
     int month = std::stoi(givenMonth);
@@ -149,19 +168,32 @@ int UserInput::acceptMonth()
   }
 }
 
-bool UserInput::checkYearInput(std::string &str)
+int UserInput::acceptYear()
 {
-  std::string& givenYear;
+  std::string givenYear;
   while (true)
   {
     std::cout << ITEM_YEAR;
     std::cin >> givenYear;
-    if (!checkMonthInput(givenYear))
+    if (!checkYearInput(givenYear))
     {
-      std::cout << "year entered was not a number";
+      std::cout << "year entered is invalid" << std::endl;
       continue;
     }
-    int month = std::stoi(givenYear);
-    return month;
+    int year = std::stoi(givenYear);
+    return year;
   }
+}
+
+size_t UserInput::getMonthSum()
+{
+  int year = acceptYear();
+  int month = acceptMonth();
+  return user->getMonthlyTotal(month, year);
+}
+
+size_t UserInput::getYearSum()
+{
+  int year = acceptYear();
+  return user->getYearlyTotal(year);
 }

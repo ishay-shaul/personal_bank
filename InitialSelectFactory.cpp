@@ -20,7 +20,7 @@ InitialSelectFactory::InitialSelectFactory (UserInput *input)
 bool InitialSelectFactory::monthOrYear ()
 {
   std::string selection;
-  std::cout << DECIDE;
+  std::cout << DECIDE << std::endl;
   std::cin >> selection;
   if(selection == MONTH){
     input->getMonthSum();

@@ -8,20 +8,15 @@
 
 int main()
 {
-  using std::unique_ptr;
-//  User* user = new User(10000);
-//  auto item1 = std::make_unique<Item>("meat", 20);
-//  Item* item2 = new Item("car", 1000);
-  auto item1 = std::make_unique<Item>("meat", 20);
-  auto item2 = std::make_unique<Item>("car", 1000);
-  auto item3 = std::make_unique<Item>("milk", 500);
-  auto item4 = std::make_unique<Item>("purse", 100);
-  auto year = std::make_unique<Year>(2025);
-  auto user = new User(10000);
-  user->addItem(std::move(item1), 2025, 4);
-  user->addItem(std::move(item2), 2025, 4);
-  user->addItem(std::move(item3), 2025, 12);
-  user->addItem(std::move(item4), 2025, 12);
-  user->display();
-  // std::cout << user->getYearlyTotal(2020) << std::endl;
+  auto user = std::make_unique<User>(10000);
+  auto userInput = std::make_unique<UserInput>(std::move(user));
+  while (true)
+  {
+    userInput->options();
+    if (userInput->isFinished())
+    {
+      std::cout << "see you next time" << std::endl;
+      break;
+    }
+  }
 }

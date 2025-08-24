@@ -12,4 +12,6 @@ add_executable(untitled1 main.cpp
         Year.h
         Year.cpp
         User.h
-        User.cpp)
+        User.cpp
+        UserInput.cpp
+        InitialSelectFactory.cpp)

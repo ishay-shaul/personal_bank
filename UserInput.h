@@ -11,6 +11,7 @@ class UserInput{
  private:
   std::string file;
   std::unique_ptr<User> user;
+  bool finish = false;
 
 
  public:
@@ -28,6 +29,7 @@ class UserInput{
   bool checkPriceInput(std::string& str);
   bool checkMonthInput(std::string& str);
   bool checkYearInput(std::string& str);
+  bool isFinished() const;
 
 };
 
