@@ -54,8 +54,7 @@ void Year::addMonth(std::unique_ptr<Month> month)
 //  allMonths.push_back(month);
 }
 
-void Year::addItem(std::unique_ptr<Item>item, int month) // do i assume that the last item is
-// always of the last month?
+void Year::addItem(std::unique_ptr<Item>item, int month)
 {
   if(allMonths.find(month) == allMonths.end()){
     allMonths[month] = std::make_unique<Month>(month);

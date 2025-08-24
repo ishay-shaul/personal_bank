@@ -20,15 +20,15 @@ class Month
   public:
     Month(int num);
     void addItem(std::unique_ptr<Item> item);
-    void display();
+    void display() const;
 //    ~Month();
 //    Month(const Month& other);
 //    Month& operator= (const Month& other);
-  Item* getItem(std::string name);
+  Item* getItem(const std::string& name);
   // Item* getLastItem();
-    int getMonthNumber();
+    int getMonthNumber() const;
     Month* getMonth();
-    size_t getTotal();
+    size_t getTotal() const;
 };
 
 #endif //UNTITLED1_MONTH_H

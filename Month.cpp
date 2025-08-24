@@ -9,31 +9,28 @@ Month::Month(int num)
 
 void Month::addItem(std::unique_ptr<Item> item)
 {
-  monthlyPurchases[item->getName()] = std::move(item);
-  // purchasesOrdered.push_back (std::move(item));
+  const Item* curItem = item.get();
+  monthlyPurchases[curItem->getName()] = std::move(item);
 }
 
-void Month::display()
+void Month::display() const
 {
   for(const auto& purchase: monthlyPurchases){
     std::cout << purchase.second->getName() << " " << purchase.second->getPrice() << std::endl;
   }
 }
 
-Item* Month::getItem(std::string name)
+Item* Month::getItem(const std::string& name)
 {
-  auto it = monthlyPurchases.find(name);
+  const auto it = monthlyPurchases.find(name);
   if (it != monthlyPurchases.end())
   {
     return it->second.get();
   }
-  else
-  {
-    return nullptr;
-  }
+  return nullptr;
 }
 
-int Month::getMonthNumber()
+int Month::getMonthNumber() const
 {
   return month;
 }
@@ -47,7 +44,7 @@ Month* Month::getMonth(){
 //   return purchasesOrdered.front().get();
 // }
 
-size_t Month::getTotal ()
+size_t Month::getTotal () const
 {
   size_t total = 0;
   for(const auto& pair: monthlyPurchases){

@@ -59,14 +59,15 @@ void User::addItem (std::unique_ptr<Item>item, int year, int month)
     allYears[year] = std::make_unique<Year>(year);
   }
 
-  Year* yearPtr = allYears[year].get();
-
-  if (!yearPtr->findMonth(month))
-  {
-    yearPtr->addMonth(std::make_unique<Month>(month));
-  }
-
-  yearPtr->addItem(std::move(item), month);
+  // Year* yearPtr = allYears[year].get();
+  //
+  // if (!yearPtr->findMonth(month))
+  // {
+  //   yearPtr->addMonth(std::make_unique<Month>(month));
+  // }
+  //
+  // yearPtr->addItem(std::move(item), month);
+  allYears[year]->addItem(std::move(item), month);
 }
 
 Year* User::findYear (int num)
