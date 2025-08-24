@@ -5,13 +5,16 @@
 #ifndef _USERINPUT_H_
 #define _USERINPUT_H_
 #include <string>
+#include "User.h"
 
 class UserInput{
  private:
   std::string file;
+  std::unique_ptr<User> user;
 
 
  public:
+  UserInput(std::unique_ptr<User> user);
   void getFile();
   void options();
   void exit();
@@ -19,7 +22,12 @@ class UserInput{
   size_t getYearSum();
   size_t getMonthSum();
   std::string firstInput();
-  bool checkItemInput(std::string& str);
+  double acceptPrice();
+  int acceptMonth();
+  int acceptYear();
+  bool checkPriceInput(std::string& str);
+  bool checkMonthInput(std::string& str);
+  bool checkYearInput(std::string& str);
 
 };
 
