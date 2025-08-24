@@ -5,13 +5,13 @@
 
 #define NO_NAME "other"
 
-Item::Item(const std::string &name, int price)
+Item::Item(const std::string &name, double price)
 {
   this->name = name;
   this->price = price;
 }
 
-Item::Item(int price)
+Item::Item(double price)
 {
   this->price = price;
   this->name = NO_NAME;
@@ -22,12 +22,12 @@ std::string Item::getName() const
   return this->name;
 }
 
-int Item::getPrice() const
+double Item::getPrice() const
 {
   return this->price;
 }
 
-void Item::setPrice(int itemPrice)
-{
-  this->price = itemPrice;
-}
+// void Item::setPrice(int itemPrice)
+// {
+//   this->price = itemPrice;
+// }

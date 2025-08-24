@@ -26,14 +26,12 @@ bool InitialSelectFactory::monthOrYear ()
     input->getMonthSum();
     return true;
   }
-  else if(selection == YEAR){
+  if(selection == YEAR){
     input->getYearSum();
     return true;
   }
-  else{
-    std::cout << ERROR;
-    return false;
-  }
+  std::cout << ERROR;
+  return false;
 }
 
 bool InitialSelectFactory::getSelection (std::string command)

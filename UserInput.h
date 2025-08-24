@@ -19,6 +19,7 @@ class UserInput{
   size_t getYearSum();
   size_t getMonthSum();
   std::string firstInput();
+  bool checkItemInput(std::string& str);
 
 };
 

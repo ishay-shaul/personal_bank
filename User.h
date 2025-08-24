@@ -15,9 +15,9 @@ class User
     User(size_t userBudget);
     void addItem(std::unique_ptr<Item> item, int year, int month);
     void display();
-    ~User();
-    User(const User& other);
-    User& operator= (const User& other);
+    // ~User();
+    // User(const User& other);
+    // User& operator= (const User& other);
 //    Year* getYear(int num);
 //    Item* getItem();
     size_t getMonthlyTotal(int monthNum, int year);

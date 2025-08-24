@@ -10,14 +10,14 @@ class Item
 {
   private:
     std::string name;
-    int price;
+    double price;
 
   public:
-    Item(const std::string& name, int price);
-    Item(int price);
+    Item(const std::string& name, double price);
+    Item(double price);
     std::string getName() const;
-    int getPrice() const ;
-    void setPrice(int price);
+    double getPrice() const ;
+    // void setPrice(int price);
 };
 
 #endif //UNTITLED1_ITEM_H
