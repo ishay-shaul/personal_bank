@@ -8,35 +8,6 @@ Year::Year(int num)
   year = num;
 }
 
-// Year::~Year()
-// {
-//   for(auto& pair: allMonths){
-//     delete pair.second;
-//   }
-// }
-//
-// Year::Year (const Year &other)
-// {
-//   for(const auto& pair: other.allMonths){
-//     allMonths[pair.first] = new Month(*pair.second);
-//   }
-// }
-//
-// Year &Year::operator= (const Year &other)
-// {
-//   if(this != &other){
-//     for(const auto& pair: allMonths){
-//       delete pair.second;
-//     }
-//     allMonths.clear();
-//
-//     for(const auto& pair: other.allMonths){
-//       allMonths[pair.first] = new Month(*pair.second);
-//     }
-//   }
-//   return *this;
-// }
-
 void Year::display()
 {
   for(const auto& month: allMonths){
@@ -51,7 +22,6 @@ void Year::addMonth(std::unique_ptr<Month> month)
     return;
   }
   allMonths[monthNum] = std::move(month);
-//  allMonths.push_back(month);
 }
 
 void Year::addItem(std::unique_ptr<Item>item, int month)
@@ -77,16 +47,16 @@ Month *Year::getMonth (int num)
   return nullptr;
 }
 
-size_t Year::getTotal ()
+double Year::getTotal () const
 {
-  size_t total = 0;
+  double total = 0;
   for(auto& pair: allMonths){
       total += pair.second->getTotal();
   }
   return total;
 }
 
-Month *Year::findMonth (int num)
+Month *Year::findMonth (int num) const
 {
   return allMonths.find(num)->second.get();
 }
