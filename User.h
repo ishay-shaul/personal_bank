@@ -6,21 +6,46 @@
 class User
 {
   private:
+    /** mapping all years and their objects*/
     std::unordered_map<int, std::unique_ptr<Year> > allYears;
-    //    std::vector<Year*> years;
+    /** the budget of the user*/
     size_t budget;
+    /**
+     * method that finds a year in the map
+     * @param num the year
+     * @return a year pointer if found, nullptr otherwise
+     */
     Year* findYear(int num);
 
  public:
-    User(size_t userBudget);
+    /**
+     * constructs a user object
+     * @param userBudget the budget of the user
+     */
+    explicit User(size_t userBudget);
+    /**
+     * adds an item to the map
+     * @param item   a pointer to the item that is being added
+     * @param year   the year of the purchase
+     * @param month  the month of the purchase
+     */
     void addItem(std::unique_ptr<Item> item, int year, int month);
-    void display();
-    // ~User();
-    // User(const User& other);
-    // User& operator= (const User& other);
-//    Year* getYear(int num);
-//    Item* getItem();
-    size_t getMonthlyTotal(int monthNum, int year);
-    size_t getYearlyTotal(int year);
+    /**
+     * displays all items that were bought by the user
+     */
+    void display() const; // do for year and month
+    /**
+     * calculates how much the user spent in a certain month
+     * @param monthNum the month
+     * @param year     the year
+     * @return teh sum if the year and month exist in the map, zero otherwise
+     */
+    double getMonthlyTotal(int monthNum, int year);
+    /**
+     * calculates the total amount the user spent in a certain year
+     * @param year the year who's spending we are totaling
+     * @return the sum if the year exists in the map, zero otherwise
+     */
+    double getYearlyTotal(int year);
 };
 #endif //_USER_H_
