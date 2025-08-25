@@ -1,10 +1,11 @@
 
 #include "Month.h"
 #include <iostream>
+#define EMPTY " "
 
 Month::Month(int num)
 {
-  this->month = num;
+  month = num;
 }
 
 void Month::addItem(std::unique_ptr<Item> item)
@@ -16,7 +17,7 @@ void Month::addItem(std::unique_ptr<Item> item)
 void Month::display() const
 {
   for(const auto& purchase: monthlyPurchases){
-    std::cout << purchase.second->getName() << " " << purchase.second->getPrice() << std::endl;
+    std::cout << purchase.second->getName() << EMPTY << purchase.second->getPrice() << std::endl;
   }
 }
 
@@ -39,14 +40,9 @@ Month* Month::getMonth(){
   return this;
 }
 
-// Item *Month::getLastItem ()
-// {
-//   return purchasesOrdered.front().get();
-// }
-
-size_t Month::getTotal () const
+double Month::getTotal () const
 {
-  size_t total = 0;
+  double total = 0;
   for(const auto& pair: monthlyPurchases){
     total += pair.second->getPrice();
   }
