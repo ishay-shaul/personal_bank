@@ -48,7 +48,14 @@ bool UserInput::isFinished() const
   return finish;
 }
 
-
+UserInput* UserInput::getInstance(std::unique_ptr<User> user)
+{
+  if (!instance)
+  {
+    instance = new UserInput(std::move(user));
+  }
+  return instance;
+}
 
 void UserInput::getFile ()
 {

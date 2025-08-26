@@ -18,6 +18,13 @@ class UserInput{
   std::unique_ptr<User> user;
   /** when true, the program ends. is set in the exit method*/
   bool finish = false;
+  /** instance of the UserInput*/
+  static UserInput* instance;
+  /**
+   * constructs a UserInput object.
+   * @param user a pointer to the user
+   */
+  explicit UserInput(std::unique_ptr<User> user);
   /**
    * method that requests a price from the user in order to create an item.
    * @return the valid price of the item
@@ -67,11 +74,17 @@ class UserInput{
   bool isFinished() const;
 
  public:
+  // /**
+  //  * constructs a UserInput object.
+  //  * @param user a pointer to the user
+  //  */
+  // explicit UserInput(std::unique_ptr<User> user);
   /**
-   * constructs a UserInput object.
-   * @param user a pointer to the user
+   * If the userInput already exists, then nothing happens, else a
+   * new instance is created and returned
+   * @return UserInput
    */
-  explicit UserInput(std::unique_ptr<User> user);
+  static UserInput* getInstance(std::unique_ptr<User> user);
   /**
 
    */
