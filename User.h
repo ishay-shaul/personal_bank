@@ -47,5 +47,23 @@ class User
      * @return the sum if the year exists in the map, zero otherwise
      */
     double getYearlyTotal(int year);
+    /**
+     * checks if a year exists for the user
+     * @param year the year that is being checked
+     * @return true if the year exists, false otherwise
+     */
+    bool existYear(int year);
+    /**
+     * checks if a month exists in the system
+     * @param monthNum the month number
+     * @param year the year number
+     * @return true if it does exist in the system, false otherwise
+     */
+    bool existMonth(int monthNum, int year);
+    /**
+     * checks if the system is empty
+     * @return true if it's empty, false otherwise
+     */
+    bool isEmpty();
 };
 #endif //_USER_H_

@@ -109,6 +109,11 @@ class UserInput{
    * @return
    */
   bool isFinished() const;
+  /**
+   * getter for the user
+   * @return a pointer to the user
+   */
+  User* getUser() const;
 };
 
 #endif //_USERINPUT_H_

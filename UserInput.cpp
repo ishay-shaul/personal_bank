@@ -32,6 +32,7 @@
 #define WRONG_MONTH "month entered is invalid"
 #define WRONG_YEAR "year entered is invalid"
 #define DECEMBER 12
+#define EMPTY "no months or years available."
 
 UserInput::UserInput(std::unique_ptr<User> user)
 {
@@ -160,6 +161,7 @@ bool UserInput::checkYearInput(std::string &str)
   {
     return false;
   }
+  if (!user->existYear(year)){return false;}
   return true;
 }
 
@@ -216,6 +218,11 @@ int UserInput::acceptYear()
 
 double UserInput::getMonthSum()
 {
+  if (user->isEmpty())
+  {
+    std::cout << EMPTY << std::endl;
+    return 0;
+  }
   const int year = acceptYear();
   const int month = acceptMonth();
   return user->getMonthlyTotal(month, year);
@@ -223,8 +230,18 @@ double UserInput::getMonthSum()
 
 double UserInput::getYearSum()
 {
+  if (user->isEmpty())
+  {
+    std::cout << EMPTY << std::endl;
+    return 0;
+  }
   const int year = acceptYear();
   return user->getYearlyTotal(year);
+}
+
+User *UserInput::getUser() const
+{
+  return user.get();
 }
 
 

@@ -54,3 +54,25 @@ void User::display () const
     year.second->display();
   }
 }
+
+bool User::existYear (const int year)
+{
+  auto requestedYear = findYear (year);
+  if(requestedYear == nullptr){return false;}
+  return true;
+}
+
+bool User::existMonth (const int monthNum, const int year)
+{
+  auto requestedYear = findYear (year);
+  if(requestedYear == nullptr){return false;}
+  if (requestedYear->findMonth(monthNum) == nullptr){return false;}
+  return true;
+}
+
+bool User::isEmpty()
+{
+  if (allYears.empty()){return true;}
+  return false;
+}
+

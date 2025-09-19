@@ -8,6 +8,7 @@
 #define MONTH "month"
 #define YEAR "year"
 #define ERROR "month or year not selected. Please pick again"
+#define EMPTY "no months or years available."
 #include "InitialSelectFactory.h"
 #include <iostream>
 
@@ -19,6 +20,11 @@ InitialSelectFactory::InitialSelectFactory (UserInput *input)
 
 bool InitialSelectFactory::monthOrYear ()
 {
+  if (input->getUser()->isEmpty())
+  {
+    std::cout << EMPTY << std::endl;
+    return false;
+  }
   std::string selection;
   std::cout << DECIDE << std::endl;
   std::getline(std::cin, selection);   // <-- instead of std::cin >>
