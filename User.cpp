@@ -76,3 +76,9 @@ bool User::isEmpty()
   return false;
 }
 
+std::unordered_map<int, std::unique_ptr<Year> > User::getAllYears()
+{
+  return allYears;
+}
+
+

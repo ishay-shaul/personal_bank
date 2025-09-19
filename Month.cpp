@@ -50,3 +50,8 @@ double Month::getTotal () const
   }
   return total;
 }
+
+std::unordered_map<std::string, std::unique_ptr<Item> > Month::getAllItems()
+{
+  return monthlyPurchases;
+}

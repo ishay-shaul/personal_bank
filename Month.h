@@ -54,6 +54,8 @@ class Month
      * @return the sum of all item prices
      */
     double getTotal() const;
+
+    std::unordered_map< std::string, std::unique_ptr<Item>> getAllItems();
 };
 
 #endif //UNTITLED1_MONTH_H

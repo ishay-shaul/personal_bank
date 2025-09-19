@@ -59,6 +59,8 @@ class Year
      * @return the sum of the spending
      */
     double getTotal() const;
+
+    std::unordered_map<int, std::unique_ptr<Month>> getAllMonths();
 };
 
 #endif //UNTITLED1_YEAR_H

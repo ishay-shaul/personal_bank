@@ -14,4 +14,6 @@ add_executable(untitled1 main.cpp
         User.h
         User.cpp
         UserInput.cpp
-        InitialSelectFactory.cpp)
+        InitialSelectFactory.cpp
+        logger.h
+        Logger.cpp)

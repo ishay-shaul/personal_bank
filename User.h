@@ -65,5 +65,7 @@ class User
      * @return true if it's empty, false otherwise
      */
     bool isEmpty();
+
+    std::unordered_map<int, std::unique_ptr<Year> > getAllYears();
 };
 #endif //_USER_H_

@@ -66,4 +66,8 @@ Month *Year::findMonth (int num) const
   return allMonths.find(num)->second.get();
 }
 
+std::unordered_map<int, std::unique_ptr<Month> > Year::getAllMonths()
+{
+  return allMonths;
+}
 
