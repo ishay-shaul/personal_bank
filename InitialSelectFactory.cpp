@@ -21,7 +21,8 @@ bool InitialSelectFactory::monthOrYear ()
 {
   std::string selection;
   std::cout << DECIDE << std::endl;
-  std::cin >> selection;
+  std::getline(std::cin, selection);   // <-- instead of std::cin >>
+  // return input;
   if(selection == MONTH){
     input->getMonthSum();
     return true;

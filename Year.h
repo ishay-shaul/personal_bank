@@ -47,7 +47,7 @@ class Year
     /**
      * displays all items the user bought in said year. same format as the month
      */
-    void display();
+    void display() const;
     /**
      * method to get a pointer to a month object in the map
      * @param num the month number

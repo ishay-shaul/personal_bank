@@ -48,6 +48,8 @@ bool UserInput::isFinished() const
   return finish;
 }
 
+UserInput* UserInput::instance = nullptr;
+
 UserInput* UserInput::getInstance(std::unique_ptr<User> user)
 {
   if (!instance)
@@ -74,17 +76,18 @@ std::string UserInput::firstInput ()
   cout << GET_SUM << std::endl;
   cout << ADD << std::endl;
   cout << EXIT << std::endl;
-  std::cin >> option;
+  std::getline(std::cin, option);
   return option;
 }
 
 void UserInput::options()
 {
- std::string input = firstInput();
+ // std::string input = firstInput();
  auto factory = new InitialSelectFactory (this);
   while (true)
   {
-    if (!factory->getSelection (input))
+    std::string input = firstInput();
+    if (!factory->getSelection(input))
     {
       std::cout << NO_OPTION << std::endl;
       continue;
@@ -223,3 +226,5 @@ double UserInput::getYearSum()
   const int year = acceptYear();
   return user->getYearlyTotal(year);
 }
+
+

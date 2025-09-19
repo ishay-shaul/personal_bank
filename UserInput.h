@@ -63,22 +63,12 @@ class UserInput{
   /**
    * in the beggining of the options method, the user will pick between some
    * options they can run. This method gives us what the user wants( to add an
-   * item, exit, etc).
+   * item, exit, etc.).
    * @return the command of the user
    */
   static std::string firstInput();
-  /**
-   * checks if the user decided to terminate the program
-   * @return
-   */
-  bool isFinished() const;
 
  public:
-  // /**
-  //  * constructs a UserInput object.
-  //  * @param user a pointer to the user
-  //  */
-  // explicit UserInput(std::unique_ptr<User> user);
   /**
    * If the userInput already exists, then nothing happens, else a
    * new instance is created and returned
@@ -114,6 +104,11 @@ class UserInput{
    * @return the total
    */
   double getMonthSum();
+  /**
+   * checks if the user decided to terminate the program
+   * @return
+   */
+  bool isFinished() const;
 };
 
 #endif //_USERINPUT_H_

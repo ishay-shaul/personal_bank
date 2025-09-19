@@ -2,6 +2,7 @@
 #include "Month.h"
 #include <iostream>
 #define EMPTY " "
+#define MONTH "month: "
 
 Month::Month(int num)
 {
@@ -16,6 +17,7 @@ void Month::addItem(std::unique_ptr<Item> item)
 
 void Month::display() const
 {
+  std::cout << MONTH << month << std::endl;
   for(const auto& purchase: monthlyPurchases){
     std::cout << purchase.second->getName() << EMPTY << purchase.second->getPrice() << std::endl;
   }

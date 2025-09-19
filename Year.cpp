@@ -3,13 +3,18 @@
 //
 #include "Year.h"
 
+#include <iostream>
+#include <ostream>
+#define YEAR "Year: "
+
 Year::Year(int num)
 {
   year = num;
 }
 
-void Year::display()
+void Year::display() const
 {
+  std::cout << YEAR << year<< std::endl;
   for(const auto& month: allMonths){
     month.second->display();
   }

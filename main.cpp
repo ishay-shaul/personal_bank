@@ -9,7 +9,8 @@
 int main()
 {
   auto user = std::make_unique<User>(10000);
-  auto userInput = std::make_unique<UserInput>(std::move(user));
+  auto userInput = UserInput::getInstance(std::move(user));
+  // auto userInput = std::make_unique<UserInput>(std::move(user));
   while (true)
   {
     userInput->options();
